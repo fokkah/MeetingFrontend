@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Navbar({ setView, onHome }) {
+function Navbar() {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light bg-light mb-4"
@@ -13,30 +14,42 @@ function Navbar({ setView, onHome }) {
       }}
     >
       <div className="container-fluid d-flex justify-content-between align-items-center">
-        <a className="navbar-brand" href="#" style={{ visibility: "hidden" }}>
+        <span className="navbar-brand" style={{ visibility: "hidden" }}>
           Calendar App
-        </a>
+        </span>
         <div className="mx-auto">
-          <button
+          <Link
             className="nav-link btn btn-link"
             style={{
               textDecoration: "none",
               fontWeight: "bold",
               fontSize: "1.2rem",
             }}
-            onClick={onHome}
+            to="/"
           >
             Home
-          </button>
+          </Link>
+          <Link
+            className="nav-link btn btn-link"
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+              fontSize: "1.2rem",
+              marginLeft: "1rem",
+            }}
+            to="/meetings"
+          >
+            Meetings
+          </Link>
         </div>
         <div>
-          <a
-            className="nav-link"
+          <Link
+            className="nav-link btn btn-link"
             style={{ fontWeight: "bold", fontSize: "1.2rem" }}
-            href="#"
+            to="/contact"
           >
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

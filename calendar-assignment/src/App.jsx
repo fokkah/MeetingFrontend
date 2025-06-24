@@ -1,60 +1,29 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Calendar from "./Components/Calendar";
 import Navbar from "./Components/Navbar";
+import Contact from "./Components/Contact";
+import Meetings from "./Components/Meetings";
 
 function App() {
-  const [view, setView] = useState("calendar");
-  const [calendarResetKey, setCalendarResetKey] = useState(0);
   const [meetings, setMeetings] = useState([]);
 
-  const handleHome = () => {
-    setView("calendar");
-    setCalendarResetKey((prev) => prev + 1);
-  };
-
-  const handleDelete = (id) => {
-    setMeetings(meetings.filter((m) => m.id !== id));
+  // Add this function to pass to Calendar
+  const handleAddMeeting = (meeting) => {
+    setMeetings([...meetings, meeting]);
   };
 
   return (
-    <div>
+    <Router>
       <div style={{ marginTop: "56px" }}>
-        <Navbar setView={setView} onHome={handleHome} />
-        {view === "calendar" && (
-          <Calendar
-            meetings={meetings}
-            setMeetings={setMeetings}
-            resetKey={calendarResetKey}
-          />
-        )}
-        {view === "meetings" && (
-          <div className="container mt-4">
-            <h3>All Meetings</h3>
-            {meetings.length === 0 && <p>No meetings booked.</p>}
-            <ul className="list-group">
-              {meetings.map((meeting) => (
-                <li
-                  key={meeting.id}
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  <div>
-                    <strong>{meeting.title}</strong> <br />
-                    {meeting.date} | {meeting.email} <br />
-                    {meeting.description}
-                  </div>
-                  <button
-                    className="btn btn-sm btn-danger"
-                    onClick={() => handleDelete(meeting.id)}
-                  >
-                    Delete
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Calendar onAddMeeting={handleAddMeeting} />} />
+          <Route path="/meetings" element={<Meetings meetings={meetings} />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
