@@ -14,7 +14,8 @@ function Calendar({ onAddMeeting }) {
 
   // Meeting form state
   const [title, setTitle] = useState("");
-  const [where, setWhere] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [description, setDescription] = useState("");
 
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
@@ -44,7 +45,8 @@ function Calendar({ onAddMeeting }) {
   function handleDateClick(day) {
     setSelectedDate(new Date(currentYear, currentMonth, day));
     setTitle("");
-    setWhere("");
+    setStartTime("");
+    setEndTime("");
     setDescription("");
   }
 
@@ -55,7 +57,8 @@ function Calendar({ onAddMeeting }) {
       onAddMeeting({
         date: selectedDate.toLocaleDateString(),
         title,
-        where,
+        startTime,
+        endTime,
         description,
       });
     }
@@ -157,12 +160,22 @@ function Calendar({ onAddMeeting }) {
             />
           </div>
           <div className="mb-2">
-            <label className="form-label">Where</label>
+            <label className="form-label">Meeting Start Time</label>
             <input
               className="form-control"
-              type="text"
-              value={where}
-              onChange={(e) => setWhere(e.target.value)}
+              type="time"
+              value={startTime}
+              onChange={(e) => setStartTime(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="form-label">Meeting End Time</label>
+            <input
+              className="form-control"
+              type="time"
+              value={endTime}
+              onChange={(e) => setEndTime(e.target.value)}
               required
             />
           </div>

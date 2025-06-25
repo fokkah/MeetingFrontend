@@ -11,13 +11,14 @@ function Navbar() {
         left: 0,
         width: "100%",
         zIndex: 1000,
+        height: "56px",
       }}
     >
       <div className="container-fluid d-flex justify-content-between align-items-center">
         <span className="navbar-brand" style={{ visibility: "hidden" }}>
           Calendar App
         </span>
-        <div className="mx-auto">
+        <div className="d-flex gap-3">
           <Link
             className="nav-link btn btn-link"
             style={{
@@ -35,7 +36,6 @@ function Navbar() {
               textDecoration: "none",
               fontWeight: "bold",
               fontSize: "1.2rem",
-              marginLeft: "1rem",
             }}
             to="/meetings"
           >

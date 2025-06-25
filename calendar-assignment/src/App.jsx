@@ -19,7 +19,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Calendar onAddMeeting={handleAddMeeting} />} />
-          <Route path="/meetings" element={<Meetings meetings={meetings} />} />
+          <Route path="/meetings" element={<Meetings meetings={meetings} setMeetings={setMeetings} />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
